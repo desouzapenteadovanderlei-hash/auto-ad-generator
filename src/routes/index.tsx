@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FinancingCalculator } from "@/components/FinancingCalculator";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="min-h-screen bg-background">
+      <SiteHeader />
       <FinancingCalculator />
     </main>
   );
