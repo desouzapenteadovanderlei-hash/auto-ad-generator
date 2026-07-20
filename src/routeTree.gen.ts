@@ -9,135 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as EstoqueRouteImport } from './routes/estoque'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as VeiculosIdRouteImport } from './routes/veiculos.$id'
-import { Route as AuthenticatedPreferenciasRouteImport } from './routes/_authenticated/preferencias'
-import { Route as AuthenticatedFavoritosRouteImport } from './routes/_authenticated/favoritos'
 
-const EstoqueRoute = EstoqueRouteImport.update({
-  id: '/estoque',
-  path: '/estoque',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VeiculosIdRoute = VeiculosIdRouteImport.update({
-  id: '/veiculos/$id',
-  path: '/veiculos/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedPreferenciasRoute =
-  AuthenticatedPreferenciasRouteImport.update({
-    id: '/preferencias',
-    path: '/preferencias',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedFavoritosRoute = AuthenticatedFavoritosRouteImport.update({
-  id: '/favoritos',
-  path: '/favoritos',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/estoque': typeof EstoqueRoute
-  '/favoritos': typeof AuthenticatedFavoritosRoute
-  '/preferencias': typeof AuthenticatedPreferenciasRoute
-  '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/estoque': typeof EstoqueRoute
-  '/favoritos': typeof AuthenticatedFavoritosRoute
-  '/preferencias': typeof AuthenticatedPreferenciasRoute
-  '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/estoque': typeof EstoqueRoute
-  '/_authenticated/favoritos': typeof AuthenticatedFavoritosRoute
-  '/_authenticated/preferencias': typeof AuthenticatedPreferenciasRoute
-  '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/auth'
-    | '/estoque'
-    | '/favoritos'
-    | '/preferencias'
-    | '/veiculos/$id'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/auth'
-    | '/estoque'
-    | '/favoritos'
-    | '/preferencias'
-    | '/veiculos/$id'
-  id:
-    | '__root__'
-    | '/'
-    | '/_authenticated'
-    | '/auth'
-    | '/estoque'
-    | '/_authenticated/favoritos'
-    | '/_authenticated/preferencias'
-    | '/veiculos/$id'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
-  EstoqueRoute: typeof EstoqueRoute
-  VeiculosIdRoute: typeof VeiculosIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/estoque': {
-      id: '/estoque'
-      path: '/estoque'
-      fullPath: '/estoque'
-      preLoaderRoute: typeof EstoqueRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -145,49 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/veiculos/$id': {
-      id: '/veiculos/$id'
-      path: '/veiculos/$id'
-      fullPath: '/veiculos/$id'
-      preLoaderRoute: typeof VeiculosIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/preferencias': {
-      id: '/_authenticated/preferencias'
-      path: '/preferencias'
-      fullPath: '/preferencias'
-      preLoaderRoute: typeof AuthenticatedPreferenciasRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/favoritos': {
-      id: '/_authenticated/favoritos'
-      path: '/favoritos'
-      fullPath: '/favoritos'
-      preLoaderRoute: typeof AuthenticatedFavoritosRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedFavoritosRoute: typeof AuthenticatedFavoritosRoute
-  AuthenticatedPreferenciasRoute: typeof AuthenticatedPreferenciasRoute
-}
-
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedFavoritosRoute: AuthenticatedFavoritosRoute,
-  AuthenticatedPreferenciasRoute: AuthenticatedPreferenciasRoute,
-}
-
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
-  EstoqueRoute: EstoqueRoute,
-  VeiculosIdRoute: VeiculosIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
