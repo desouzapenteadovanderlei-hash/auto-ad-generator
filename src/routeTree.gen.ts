@@ -14,6 +14,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VeiculosIdRouteImport } from './routes/veiculos.$id'
+import { Route as AuthenticatedPreferenciasRouteImport } from './routes/_authenticated/preferencias'
 import { Route as AuthenticatedFavoritosRouteImport } from './routes/_authenticated/favoritos'
 
 const EstoqueRoute = EstoqueRouteImport.update({
@@ -40,6 +41,12 @@ const VeiculosIdRoute = VeiculosIdRouteImport.update({
   path: '/veiculos/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedPreferenciasRoute =
+  AuthenticatedPreferenciasRouteImport.update({
+    id: '/preferencias',
+    path: '/preferencias',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedFavoritosRoute = AuthenticatedFavoritosRouteImport.update({
   id: '/favoritos',
   path: '/favoritos',
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/estoque': typeof EstoqueRoute
   '/favoritos': typeof AuthenticatedFavoritosRoute
+  '/preferencias': typeof AuthenticatedPreferenciasRoute
   '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/estoque': typeof EstoqueRoute
   '/favoritos': typeof AuthenticatedFavoritosRoute
+  '/preferencias': typeof AuthenticatedPreferenciasRoute
   '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRoutesById {
@@ -67,13 +76,26 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/estoque': typeof EstoqueRoute
   '/_authenticated/favoritos': typeof AuthenticatedFavoritosRoute
+  '/_authenticated/preferencias': typeof AuthenticatedPreferenciasRoute
   '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/estoque' | '/favoritos' | '/veiculos/$id'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/estoque'
+    | '/favoritos'
+    | '/preferencias'
+    | '/veiculos/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/estoque' | '/favoritos' | '/veiculos/$id'
+  to:
+    | '/'
+    | '/auth'
+    | '/estoque'
+    | '/favoritos'
+    | '/preferencias'
+    | '/veiculos/$id'
   id:
     | '__root__'
     | '/'
@@ -81,6 +103,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/estoque'
     | '/_authenticated/favoritos'
+    | '/_authenticated/preferencias'
     | '/veiculos/$id'
   fileRoutesById: FileRoutesById
 }
@@ -129,6 +152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VeiculosIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/preferencias': {
+      id: '/_authenticated/preferencias'
+      path: '/preferencias'
+      fullPath: '/preferencias'
+      preLoaderRoute: typeof AuthenticatedPreferenciasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/favoritos': {
       id: '/_authenticated/favoritos'
       path: '/favoritos'
@@ -141,10 +171,12 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedFavoritosRoute: typeof AuthenticatedFavoritosRoute
+  AuthenticatedPreferenciasRoute: typeof AuthenticatedPreferenciasRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedFavoritosRoute: AuthenticatedFavoritosRoute,
+  AuthenticatedPreferenciasRoute: AuthenticatedPreferenciasRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
