@@ -14,7 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      financing_leads: {
+        Row: {
+          created_at: string
+          down_payment: number
+          email: string
+          id: string
+          interest_rate: number
+          monthly_payment: number
+          name: string
+          notes: string | null
+          phone: string
+          term_months: number
+          total_amount: number
+          total_interest: number
+          vehicle: string | null
+          vehicle_price: number
+        }
+        Insert: {
+          created_at?: string
+          down_payment: number
+          email: string
+          id?: string
+          interest_rate: number
+          monthly_payment: number
+          name: string
+          notes?: string | null
+          phone: string
+          term_months: number
+          total_amount: number
+          total_interest: number
+          vehicle?: string | null
+          vehicle_price: number
+        }
+        Update: {
+          created_at?: string
+          down_payment?: number
+          email?: string
+          id?: string
+          interest_rate?: number
+          monthly_payment?: number
+          name?: string
+          notes?: string | null
+          phone?: string
+          term_months?: number
+          total_amount?: number
+          total_interest?: number
+          vehicle?: string | null
+          vehicle_price?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
