@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as EstoqueRouteImport } from './routes/estoque'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VeiculosIdRouteImport } from './routes/veiculos.$id'
+import { Route as AuthenticatedFavoritosRouteImport } from './routes/_authenticated/favoritos'
 
 const EstoqueRoute = EstoqueRouteImport.update({
   id: '/estoque',
@@ -22,6 +24,10 @@ const EstoqueRoute = EstoqueRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -34,36 +40,53 @@ const VeiculosIdRoute = VeiculosIdRouteImport.update({
   path: '/veiculos/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedFavoritosRoute = AuthenticatedFavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/estoque': typeof EstoqueRoute
+  '/favoritos': typeof AuthenticatedFavoritosRoute
   '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/estoque': typeof EstoqueRoute
+  '/favoritos': typeof AuthenticatedFavoritosRoute
   '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/estoque': typeof EstoqueRoute
+  '/_authenticated/favoritos': typeof AuthenticatedFavoritosRoute
   '/veiculos/$id': typeof VeiculosIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/estoque' | '/veiculos/$id'
+  fullPaths: '/' | '/auth' | '/estoque' | '/favoritos' | '/veiculos/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/estoque' | '/veiculos/$id'
-  id: '__root__' | '/' | '/auth' | '/estoque' | '/veiculos/$id'
+  to: '/' | '/auth' | '/estoque' | '/favoritos' | '/veiculos/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/estoque'
+    | '/_authenticated/favoritos'
+    | '/veiculos/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   EstoqueRoute: typeof EstoqueRoute
   VeiculosIdRoute: typeof VeiculosIdRoute
@@ -85,6 +108,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -99,11 +129,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VeiculosIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/favoritos': {
+      id: '/_authenticated/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof AuthenticatedFavoritosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedFavoritosRoute: typeof AuthenticatedFavoritosRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedFavoritosRoute: AuthenticatedFavoritosRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   EstoqueRoute: EstoqueRoute,
   VeiculosIdRoute: VeiculosIdRoute,
