@@ -201,6 +201,48 @@ export type Database = {
         }
         Relationships: []
       }
+      sell_leads: {
+        Row: {
+          ano: number
+          created_at: string
+          email: string
+          id: string
+          km: number
+          marca: string
+          modelo: string
+          nome: string
+          observacoes: string | null
+          preco_desejado: number | null
+          telefone: string
+        }
+        Insert: {
+          ano: number
+          created_at?: string
+          email: string
+          id?: string
+          km?: number
+          marca: string
+          modelo: string
+          nome: string
+          observacoes?: string | null
+          preco_desejado?: number | null
+          telefone: string
+        }
+        Update: {
+          ano?: number
+          created_at?: string
+          email?: string
+          id?: string
+          km?: number
+          marca?: string
+          modelo?: string
+          nome?: string
+          observacoes?: string | null
+          preco_desejado?: number | null
+          telefone?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -322,6 +364,8 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      claim_first_admin: { Args: never; Returns: boolean }
+      ensure_user_setup: { Args: never; Returns: undefined }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
