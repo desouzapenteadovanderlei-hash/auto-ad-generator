@@ -24,8 +24,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function loadRole(uid: string | undefined) {
     if (!uid) { setIsAdmin(false); return; }
-    const { data } = await supabase.rpc("has_role", { _user_id: uid, _role: "admin" });
-    setIsAdmin(Boolean(data));
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data } = await (supabase.rpc as any)("has_role", { _user_id: uid, _role: "admin" });
+      setIsAdmin(Boolean(data));
+    } catch { setIsAdmin(false); }
+  }
+
+  async function ensureSetup() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    try { await (supabase.rpc as any)("ensure_user_setup"); } catch { /* ignore */ }
   }
 
   useEffect(() => {
@@ -34,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!mounted) return;
       setSession(data.session);
       if (data.session?.user) {
-        await supabase.rpc("ensure_user_setup").catch(() => {});
+        await ensureSetup();
         await loadRole(data.session.user.id);
       }
       setLoading(false);
@@ -44,7 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(s);
       if (event === "SIGNED_IN" && s?.user) {
         setTimeout(async () => {
-          await supabase.rpc("ensure_user_setup").catch(() => {});
+          await ensureSetup();
           await loadRole(s.user.id);
         }, 0);
       }
