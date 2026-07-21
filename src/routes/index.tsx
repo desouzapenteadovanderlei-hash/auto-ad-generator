@@ -11,8 +11,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "VSP Comércio de Veículos — Seminovos com procedência" },
       { name: "description", content: "Seminovos revisados com garantia, financiamento facilitado e atendimento pessoal na VSP Veículos." },
-      { property: "og:title", content: "VSP Comércio de Veículos" },
-      { property: "og:description", content: "Seminovos revisados com garantia. Estoque online e simulador de financiamento." },
+      { property: "og:title", content: "VSP Comércio de Veículos — Seminovos com procedência" },
+      { property: "og:description", content: "Seminovos revisados com garantia, financiamento facilitado e atendimento pessoal na VSP Veículos." },
     ],
   }),
   component: Home,
