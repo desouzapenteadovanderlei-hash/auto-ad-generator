@@ -9,27 +9,181 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VendaSeuCarroRouteImport } from './routes/venda-seu-carro'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as EstoqueRouteImport } from './routes/estoque'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as VeiculoIdRouteImport } from './routes/veiculo.$id'
 
-export interface FileRoutesByFullPath {}
-export interface FileRoutesByTo {}
+const VendaSeuCarroRoute = VendaSeuCarroRouteImport.update({
+  id: '/venda-seu-carro',
+  path: '/venda-seu-carro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstoqueRoute = EstoqueRouteImport.update({
+  id: '/estoque',
+  path: '/estoque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VeiculoIdRoute = VeiculoIdRouteImport.update({
+  id: '/veiculo/$id',
+  path: '/veiculo/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/estoque': typeof EstoqueRoute
+  '/sobre': typeof SobreRoute
+  '/venda-seu-carro': typeof VendaSeuCarroRoute
+  '/veiculo/$id': typeof VeiculoIdRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/estoque': typeof EstoqueRoute
+  '/sobre': typeof SobreRoute
+  '/venda-seu-carro': typeof VendaSeuCarroRoute
+  '/veiculo/$id': typeof VeiculoIdRoute
+}
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/estoque': typeof EstoqueRoute
+  '/sobre': typeof SobreRoute
+  '/venda-seu-carro': typeof VendaSeuCarroRoute
+  '/veiculo/$id': typeof VeiculoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: never
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/contato'
+    | '/estoque'
+    | '/sobre'
+    | '/venda-seu-carro'
+    | '/veiculo/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: never
-  id: '__root__'
+  to:
+    | '/'
+    | '/auth'
+    | '/contato'
+    | '/estoque'
+    | '/sobre'
+    | '/venda-seu-carro'
+    | '/veiculo/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/contato'
+    | '/estoque'
+    | '/sobre'
+    | '/venda-seu-carro'
+    | '/veiculo/$id'
   fileRoutesById: FileRoutesById
 }
-export interface RootRouteChildren {}
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
+  ContatoRoute: typeof ContatoRoute
+  EstoqueRoute: typeof EstoqueRoute
+  SobreRoute: typeof SobreRoute
+  VendaSeuCarroRoute: typeof VendaSeuCarroRoute
+  VeiculoIdRoute: typeof VeiculoIdRoute
 }
 
-const rootRouteChildren: RootRouteChildren = {}
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/venda-seu-carro': {
+      id: '/venda-seu-carro'
+      path: '/venda-seu-carro'
+      fullPath: '/venda-seu-carro'
+      preLoaderRoute: typeof VendaSeuCarroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estoque': {
+      id: '/estoque'
+      path: '/estoque'
+      fullPath: '/estoque'
+      preLoaderRoute: typeof EstoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/veiculo/$id': {
+      id: '/veiculo/$id'
+      path: '/veiculo/$id'
+      fullPath: '/veiculo/$id'
+      preLoaderRoute: typeof VeiculoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
+  ContatoRoute: ContatoRoute,
+  EstoqueRoute: EstoqueRoute,
+  SobreRoute: SobreRoute,
+  VendaSeuCarroRoute: VendaSeuCarroRoute,
+  VeiculoIdRoute: VeiculoIdRoute,
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
