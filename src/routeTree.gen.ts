@@ -9,38 +9,268 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VendaSeuCarroRouteImport } from './routes/venda-seu-carro'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as EstoqueRouteImport } from './routes/estoque'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VeiculoIdRouteImport } from './routes/veiculo.$id'
+import { Route as AuthenticatedFavoritosRouteImport } from './routes/_authenticated/favoritos'
+import { Route as AuthenticatedAlertasRouteImport } from './routes/_authenticated/alertas'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminVeiculosRouteImport } from './routes/_authenticated/admin.veiculos'
+import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
+import { Route as AuthenticatedAdminLeadsVendaRouteImport } from './routes/_authenticated/admin.leads-venda'
+import { Route as AuthenticatedAdminLeadsFinanciamentoRouteImport } from './routes/_authenticated/admin.leads-financiamento'
 
+const VendaSeuCarroRoute = VendaSeuCarroRouteImport.update({
+  id: '/venda-seu-carro',
+  path: '/venda-seu-carro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstoqueRoute = EstoqueRouteImport.update({
+  id: '/estoque',
+  path: '/estoque',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VeiculoIdRoute = VeiculoIdRouteImport.update({
+  id: '/veiculo/$id',
+  path: '/veiculo/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedFavoritosRoute = AuthenticatedFavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAlertasRoute = AuthenticatedAlertasRouteImport.update({
+  id: '/alertas',
+  path: '/alertas',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRoute,
+} as any)
+const AuthenticatedAdminVeiculosRoute =
+  AuthenticatedAdminVeiculosRouteImport.update({
+    id: '/veiculos',
+    path: '/veiculos',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminUsuariosRoute =
+  AuthenticatedAdminUsuariosRouteImport.update({
+    id: '/usuarios',
+    path: '/usuarios',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminLeadsVendaRoute =
+  AuthenticatedAdminLeadsVendaRouteImport.update({
+    id: '/leads-venda',
+    path: '/leads-venda',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminLeadsFinanciamentoRoute =
+  AuthenticatedAdminLeadsFinanciamentoRouteImport.update({
+    id: '/leads-financiamento',
+    path: '/leads-financiamento',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/estoque': typeof EstoqueRoute
+  '/sobre': typeof SobreRoute
+  '/venda-seu-carro': typeof VendaSeuCarroRoute
+  '/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/alertas': typeof AuthenticatedAlertasRoute
+  '/favoritos': typeof AuthenticatedFavoritosRoute
+  '/veiculo/$id': typeof VeiculoIdRoute
+  '/admin/leads-financiamento': typeof AuthenticatedAdminLeadsFinanciamentoRoute
+  '/admin/leads-venda': typeof AuthenticatedAdminLeadsVendaRoute
+  '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
+  '/admin/veiculos': typeof AuthenticatedAdminVeiculosRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/estoque': typeof EstoqueRoute
+  '/sobre': typeof SobreRoute
+  '/venda-seu-carro': typeof VendaSeuCarroRoute
+  '/alertas': typeof AuthenticatedAlertasRoute
+  '/favoritos': typeof AuthenticatedFavoritosRoute
+  '/veiculo/$id': typeof VeiculoIdRoute
+  '/admin/leads-financiamento': typeof AuthenticatedAdminLeadsFinanciamentoRoute
+  '/admin/leads-venda': typeof AuthenticatedAdminLeadsVendaRoute
+  '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
+  '/admin/veiculos': typeof AuthenticatedAdminVeiculosRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/contato': typeof ContatoRoute
+  '/estoque': typeof EstoqueRoute
+  '/sobre': typeof SobreRoute
+  '/venda-seu-carro': typeof VendaSeuCarroRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
+  '/_authenticated/alertas': typeof AuthenticatedAlertasRoute
+  '/_authenticated/favoritos': typeof AuthenticatedFavoritosRoute
+  '/veiculo/$id': typeof VeiculoIdRoute
+  '/_authenticated/admin/leads-financiamento': typeof AuthenticatedAdminLeadsFinanciamentoRoute
+  '/_authenticated/admin/leads-venda': typeof AuthenticatedAdminLeadsVendaRoute
+  '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
+  '/_authenticated/admin/veiculos': typeof AuthenticatedAdminVeiculosRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/contato'
+    | '/estoque'
+    | '/sobre'
+    | '/venda-seu-carro'
+    | '/admin'
+    | '/alertas'
+    | '/favoritos'
+    | '/veiculo/$id'
+    | '/admin/leads-financiamento'
+    | '/admin/leads-venda'
+    | '/admin/usuarios'
+    | '/admin/veiculos'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/contato'
+    | '/estoque'
+    | '/sobre'
+    | '/venda-seu-carro'
+    | '/alertas'
+    | '/favoritos'
+    | '/veiculo/$id'
+    | '/admin/leads-financiamento'
+    | '/admin/leads-venda'
+    | '/admin/usuarios'
+    | '/admin/veiculos'
+    | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/contato'
+    | '/estoque'
+    | '/sobre'
+    | '/venda-seu-carro'
+    | '/_authenticated/admin'
+    | '/_authenticated/alertas'
+    | '/_authenticated/favoritos'
+    | '/veiculo/$id'
+    | '/_authenticated/admin/leads-financiamento'
+    | '/_authenticated/admin/leads-venda'
+    | '/_authenticated/admin/usuarios'
+    | '/_authenticated/admin/veiculos'
+    | '/_authenticated/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ContatoRoute: typeof ContatoRoute
+  EstoqueRoute: typeof EstoqueRoute
+  SobreRoute: typeof SobreRoute
+  VendaSeuCarroRoute: typeof VendaSeuCarroRoute
+  VeiculoIdRoute: typeof VeiculoIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/venda-seu-carro': {
+      id: '/venda-seu-carro'
+      path: '/venda-seu-carro'
+      fullPath: '/venda-seu-carro'
+      preLoaderRoute: typeof VendaSeuCarroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estoque': {
+      id: '/estoque'
+      path: '/estoque'
+      fullPath: '/estoque'
+      preLoaderRoute: typeof EstoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +278,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/veiculo/$id': {
+      id: '/veiculo/$id'
+      path: '/veiculo/$id'
+      fullPath: '/veiculo/$id'
+      preLoaderRoute: typeof VeiculoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/favoritos': {
+      id: '/_authenticated/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof AuthenticatedFavoritosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/alertas': {
+      id: '/_authenticated/alertas'
+      path: '/alertas'
+      fullPath: '/alertas'
+      preLoaderRoute: typeof AuthenticatedAlertasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/veiculos': {
+      id: '/_authenticated/admin/veiculos'
+      path: '/veiculos'
+      fullPath: '/admin/veiculos'
+      preLoaderRoute: typeof AuthenticatedAdminVeiculosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/usuarios': {
+      id: '/_authenticated/admin/usuarios'
+      path: '/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AuthenticatedAdminUsuariosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/leads-venda': {
+      id: '/_authenticated/admin/leads-venda'
+      path: '/leads-venda'
+      fullPath: '/admin/leads-venda'
+      preLoaderRoute: typeof AuthenticatedAdminLeadsVendaRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/leads-financiamento': {
+      id: '/_authenticated/admin/leads-financiamento'
+      path: '/leads-financiamento'
+      fullPath: '/admin/leads-financiamento'
+      preLoaderRoute: typeof AuthenticatedAdminLeadsFinanciamentoRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteChildren {
+  AuthenticatedAdminLeadsFinanciamentoRoute: typeof AuthenticatedAdminLeadsFinanciamentoRoute
+  AuthenticatedAdminLeadsVendaRoute: typeof AuthenticatedAdminLeadsVendaRoute
+  AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
+  AuthenticatedAdminVeiculosRoute: typeof AuthenticatedAdminVeiculosRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+}
+
+const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
+  AuthenticatedAdminLeadsFinanciamentoRoute:
+    AuthenticatedAdminLeadsFinanciamentoRoute,
+  AuthenticatedAdminLeadsVendaRoute: AuthenticatedAdminLeadsVendaRoute,
+  AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
+  AuthenticatedAdminVeiculosRoute: AuthenticatedAdminVeiculosRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+}
+
+const AuthenticatedAdminRouteWithChildren =
+  AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRouteWithChildren
+  AuthenticatedAlertasRoute: typeof AuthenticatedAlertasRoute
+  AuthenticatedFavoritosRoute: typeof AuthenticatedFavoritosRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRouteWithChildren,
+  AuthenticatedAlertasRoute: AuthenticatedAlertasRoute,
+  AuthenticatedFavoritosRoute: AuthenticatedFavoritosRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ContatoRoute: ContatoRoute,
+  EstoqueRoute: EstoqueRoute,
+  SobreRoute: SobreRoute,
+  VendaSeuCarroRoute: VendaSeuCarroRoute,
+  VeiculoIdRoute: VeiculoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
