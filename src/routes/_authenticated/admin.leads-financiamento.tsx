@@ -18,10 +18,10 @@ function LeadsFin() {
     <div>
       <h1 className="mb-4 text-2xl font-bold">Leads de financiamento ({data.length})</h1>
       <div className="space-y-2">
-        {data.map((l) => (
+        {data.map((l: Record<string, unknown> & { id: string; created_at: string }) => (
           <Card key={l.id}><CardContent className="p-3">
-            <p className="font-medium">{l.nome} • {l.email} • {l.telefone}</p>
-            <p className="text-sm text-muted-foreground">Veículo {BRL.format(Number(l.valor_veiculo))} • Entrada {BRL.format(Number(l.entrada))} • {l.prazo}x • {l.taxa_juros}% a.m. • Parcela {BRL.format(Number(l.valor_parcela))}</p>
+            <p className="font-medium">{String(l.nome ?? l.name ?? "")} • {String(l.email ?? "")} • {String(l.telefone ?? l.phone ?? "")}</p>
+            <p className="text-sm text-muted-foreground">Veículo {BRL.format(Number(l.valor_veiculo ?? l.vehicle_price ?? 0))} • Entrada {BRL.format(Number(l.entrada ?? l.down_payment ?? 0))} • {String(l.prazo ?? l.term_months ?? "")}x • {String(l.taxa_juros ?? l.interest_rate ?? "")}% a.m. • Parcela {BRL.format(Number(l.valor_parcela ?? l.monthly_payment ?? 0))}</p>
             <p className="text-xs text-muted-foreground">{new Date(l.created_at).toLocaleString("pt-BR")}</p>
           </CardContent></Card>
         ))}

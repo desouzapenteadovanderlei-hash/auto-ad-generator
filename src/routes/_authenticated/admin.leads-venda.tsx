@@ -17,7 +17,7 @@ function LeadsVenda() {
     <div>
       <h1 className="mb-4 text-2xl font-bold">Leads de venda ({data.length})</h1>
       <div className="space-y-2">
-        {data.map((l: Record<string, unknown>) => (
+        {(data as unknown as Array<Record<string, unknown>>).map((l) => (
           <Card key={String(l.id)}><CardContent className="p-3">
             <p className="font-medium">{String(l.nome)} • {String(l.email)} • {String(l.telefone)}</p>
             <p className="text-sm text-muted-foreground">{String(l.marca)} {String(l.modelo)} {String(l.ano)} • {String(l.km)} km {l.preco_desejado ? `• pede ${l.preco_desejado}` : ""}</p>
