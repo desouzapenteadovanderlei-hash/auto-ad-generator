@@ -10,9 +10,10 @@
     "preview": "vite preview",
     "ci-install": "npm ci",
     "build:prod": "vite build",
+    "build:ghpages": "npm run build:prod && node ./scripts/build-gh-pages.js",
     "preview:prod": "vite preview --strictPort",
-    "deploy": "npm run build:prod && gh-pages -d ./.output/public -b gh-pages",
-    "deploy:git": "npm run build:prod && node ./scripts/deploy-gh-branch.js",
+    "deploy": "npm run build:ghpages && gh-pages -d ./.output/public -b gh-pages",
+    "deploy:git": "npm run build:ghpages && node ./scripts/deploy-gh-branch.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
