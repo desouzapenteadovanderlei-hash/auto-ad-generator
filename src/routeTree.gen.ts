@@ -9,41 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as VendaSeuCarroRouteImport } from './routes/venda-seu-carro'
-import { Route as SobreRouteImport } from './routes/sobre'
-import { Route as EstoqueRouteImport } from './routes/estoque'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as VeiculoIdRouteImport } from './routes/veiculo.$id'
-import { Route as AuthenticatedFavoritosRouteImport } from './routes/_authenticated/favoritos'
-import { Route as AuthenticatedAlertasRouteImport } from './routes/_authenticated/alertas'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as EstoqueRouteImport } from './routes/estoque'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as VendaSeuCarroRouteImport } from './routes/venda-seu-carro'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAlertasRouteImport } from './routes/_authenticated/alertas'
+import { Route as AuthenticatedFavoritosRouteImport } from './routes/_authenticated/favoritos'
+import { Route as VeiculoIdRouteImport } from './routes/veiculo.$id'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
-import { Route as AuthenticatedAdminVeiculosRouteImport } from './routes/_authenticated/admin.veiculos'
-import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
-import { Route as AuthenticatedAdminLeadsVendaRouteImport } from './routes/_authenticated/admin.leads-venda'
 import { Route as AuthenticatedAdminLeadsFinanciamentoRouteImport } from './routes/_authenticated/admin.leads-financiamento'
+import { Route as AuthenticatedAdminLeadsVendaRouteImport } from './routes/_authenticated/admin.leads-venda'
+import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
+import { Route as AuthenticatedAdminVeiculosRouteImport } from './routes/_authenticated/admin.veiculos'
 
-const VendaSeuCarroRoute = VendaSeuCarroRouteImport.update({
-  id: '/venda-seu-carro',
-  path: '/venda-seu-carro',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SobreRoute = SobreRouteImport.update({
-  id: '/sobre',
-  path: '/sobre',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EstoqueRoute = EstoqueRouteImport.update({
-  id: '/estoque',
-  path: '/estoque',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -51,23 +40,29 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const EstoqueRoute = EstoqueRouteImport.update({
+  id: '/estoque',
+  path: '/estoque',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VeiculoIdRoute = VeiculoIdRouteImport.update({
-  id: '/veiculo/$id',
-  path: '/veiculo/$id',
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedFavoritosRoute = AuthenticatedFavoritosRouteImport.update({
-  id: '/favoritos',
-  path: '/favoritos',
+const VendaSeuCarroRoute = VendaSeuCarroRouteImport.update({
+  id: '/venda-seu-carro',
+  path: '/venda-seu-carro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAlertasRoute = AuthenticatedAlertasRouteImport.update({
@@ -75,26 +70,25 @@ const AuthenticatedAlertasRoute = AuthenticatedAlertasRouteImport.update({
   path: '/alertas',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const AuthenticatedFavoritosRoute = AuthenticatedFavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const VeiculoIdRoute = VeiculoIdRouteImport.update({
+  id: '/veiculo/$id',
+  path: '/veiculo/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
-const AuthenticatedAdminVeiculosRoute =
-  AuthenticatedAdminVeiculosRouteImport.update({
-    id: '/veiculos',
-    path: '/veiculos',
-    getParentRoute: () => AuthenticatedAdminRoute,
-  } as any)
-const AuthenticatedAdminUsuariosRoute =
-  AuthenticatedAdminUsuariosRouteImport.update({
-    id: '/usuarios',
-    path: '/usuarios',
+const AuthenticatedAdminLeadsFinanciamentoRoute =
+  AuthenticatedAdminLeadsFinanciamentoRouteImport.update({
+    id: '/leads-financiamento',
+    path: '/leads-financiamento',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
 const AuthenticatedAdminLeadsVendaRoute =
@@ -103,10 +97,16 @@ const AuthenticatedAdminLeadsVendaRoute =
     path: '/leads-venda',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
-const AuthenticatedAdminLeadsFinanciamentoRoute =
-  AuthenticatedAdminLeadsFinanciamentoRouteImport.update({
-    id: '/leads-financiamento',
-    path: '/leads-financiamento',
+const AuthenticatedAdminUsuariosRoute =
+  AuthenticatedAdminUsuariosRouteImport.update({
+    id: '/usuarios',
+    path: '/usuarios',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
+const AuthenticatedAdminVeiculosRoute =
+  AuthenticatedAdminVeiculosRouteImport.update({
+    id: '/veiculos',
+    path: '/veiculos',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
 
@@ -229,39 +229,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/venda-seu-carro': {
-      id: '/venda-seu-carro'
-      path: '/venda-seu-carro'
-      fullPath: '/venda-seu-carro'
-      preLoaderRoute: typeof VendaSeuCarroRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sobre': {
-      id: '/sobre'
-      path: '/sobre'
-      fullPath: '/sobre'
-      preLoaderRoute: typeof SobreRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/estoque': {
-      id: '/estoque'
-      path: '/estoque'
-      fullPath: '/estoque'
-      preLoaderRoute: typeof EstoqueRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -271,25 +243,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/veiculo/$id': {
-      id: '/veiculo/$id'
-      path: '/veiculo/$id'
-      fullPath: '/veiculo/$id'
-      preLoaderRoute: typeof VeiculoIdRouteImport
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/favoritos': {
-      id: '/_authenticated/favoritos'
-      path: '/favoritos'
-      fullPath: '/favoritos'
-      preLoaderRoute: typeof AuthenticatedFavoritosRouteImport
+    '/estoque': {
+      id: '/estoque'
+      path: '/estoque'
+      fullPath: '/estoque'
+      preLoaderRoute: typeof EstoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/venda-seu-carro': {
+      id: '/venda-seu-carro'
+      path: '/venda-seu-carro'
+      fullPath: '/venda-seu-carro'
+      preLoaderRoute: typeof VendaSeuCarroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/alertas': {
@@ -299,12 +292,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAlertasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin': {
-      id: '/_authenticated/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+    '/_authenticated/favoritos': {
+      id: '/_authenticated/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof AuthenticatedFavoritosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/veiculo/$id': {
+      id: '/veiculo/$id'
+      path: '/veiculo/$id'
+      fullPath: '/veiculo/$id'
+      preLoaderRoute: typeof VeiculoIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
@@ -313,18 +313,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
-    '/_authenticated/admin/veiculos': {
-      id: '/_authenticated/admin/veiculos'
-      path: '/veiculos'
-      fullPath: '/admin/veiculos'
-      preLoaderRoute: typeof AuthenticatedAdminVeiculosRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
-    '/_authenticated/admin/usuarios': {
-      id: '/_authenticated/admin/usuarios'
-      path: '/usuarios'
-      fullPath: '/admin/usuarios'
-      preLoaderRoute: typeof AuthenticatedAdminUsuariosRouteImport
+    '/_authenticated/admin/leads-financiamento': {
+      id: '/_authenticated/admin/leads-financiamento'
+      path: '/leads-financiamento'
+      fullPath: '/admin/leads-financiamento'
+      preLoaderRoute: typeof AuthenticatedAdminLeadsFinanciamentoRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
     '/_authenticated/admin/leads-venda': {
@@ -334,11 +327,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminLeadsVendaRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
-    '/_authenticated/admin/leads-financiamento': {
-      id: '/_authenticated/admin/leads-financiamento'
-      path: '/leads-financiamento'
-      fullPath: '/admin/leads-financiamento'
-      preLoaderRoute: typeof AuthenticatedAdminLeadsFinanciamentoRouteImport
+    '/_authenticated/admin/usuarios': {
+      id: '/_authenticated/admin/usuarios'
+      path: '/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AuthenticatedAdminUsuariosRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
+    '/_authenticated/admin/veiculos': {
+      id: '/_authenticated/admin/veiculos'
+      path: '/veiculos'
+      fullPath: '/admin/veiculos'
+      preLoaderRoute: typeof AuthenticatedAdminVeiculosRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
   }
@@ -392,3 +392,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

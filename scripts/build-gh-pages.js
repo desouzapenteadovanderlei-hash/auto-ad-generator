@@ -42,4 +42,15 @@ const html = `<!doctype html>
 
 fs.writeFileSync(path.join(publicDir, 'index.html'), html, 'utf8');
 fs.writeFileSync(path.join(publicDir, '404.html'), html, 'utf8');
+
+const customDomain = process.env.CUSTOM_DOMAIN;
+const publicCname = path.join(root, 'public', 'CNAME');
+if (customDomain) {
+  fs.writeFileSync(path.join(publicDir, 'CNAME'), customDomain.trim() + '\n', 'utf8');
+  console.log(`Generated CNAME from CUSTOM_DOMAIN=${customDomain}`);
+} else if (fs.existsSync(publicCname)) {
+  fs.copyFileSync(publicCname, path.join(publicDir, 'CNAME'));
+  console.log('Copied public/CNAME to .output/public/CNAME');
+}
+
 console.log('Generated index.html and 404.html for gh-pages');
